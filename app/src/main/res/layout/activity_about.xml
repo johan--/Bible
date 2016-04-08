@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+
+        <TextView
+            style="@style/AboutTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_title_nkjv"/>
+
+        <TextView
+
+            style="@style/AboutContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_content_nkjv"/>
+
+        <TextView
+
+            style="@style/AboutTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_title_niv"/>
+
+        <TextView
+
+            style="@style/AboutContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_content_niv"/>
+
+        <TextView
+
+            style="@style/AboutTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_title_wop_nkjv"/>
+
+        <TextView
+
+            style="@style/AboutContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_content_wop_nkjv"/>
+
+        <TextView
+
+            style="@style/AboutTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_title_niv_spanish"/>
+
+        <TextView
+
+            style="@style/AboutContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_content_niv_spanish"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
