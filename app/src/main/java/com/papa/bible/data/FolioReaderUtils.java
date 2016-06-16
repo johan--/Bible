@@ -25,9 +25,7 @@ import java.util.zip.ZipFile;
 
 import nl.siegmann.epublib.domain.SpineReference;
 
-/**
- * Created by rodrigo.almeida on 29/04/15.
- */
+
 public class FolioReaderUtils {
 
     public static final String HTML_ENCODING = "UTF-8";

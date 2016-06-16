@@ -1,12 +1,110 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="br.com.rsa.folioreader.fragments.FoliorRaderViewPagerFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
 
     <com.papa.bible.view.ReaderWebView
+        android:id="@+id/reader_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/reader_webview"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-</FrameLayout>
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_board"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <SeekBar
+            android:id="@+id/size_seek_bar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+
+        <RelativeLayout
+            android:id="@+id/play_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+
+            <ImageButton
+                android:id="@+id/img_pre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:src="@drawable/ic_play_pre"/>
+
+            <ImageButton
+                android:id="@+id/img_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:layout_toRightOf="@+id/img_pre"
+                android:contentDescription="@string/about"
+                android:src="@drawable/ic_play_pause"/>
+
+
+            <ImageButton
+                android:id="@+id/img_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:layout_toRightOf="@+id/img_play"
+                android:src="@drawable/ic_play_next"/>
+
+            <TextView
+                android:id="@+id/audio_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img_next"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/img_chapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/img_chapter"/>
+
+        <ImageButton
+            android:id="@+id/img_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_search_history"/>
+
+        <ImageButton
+
+            android:id="@+id/img_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/img_search"
+            android:layout_centerVertical="true"
+            android:src="@drawable/img_bookmark"/>
+
+    </RelativeLayout>-->
+
+</LinearLayout>

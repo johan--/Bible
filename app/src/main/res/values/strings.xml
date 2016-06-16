@@ -16,9 +16,25 @@ Narrated by George Sarris.</string>
     <string name="about_content_niv_spanish">In 1979, The International Bible Society (now Biblica®) decided to produce a New Testament in Spanish following the NIV translation principles. For more than ten years the Biblical scholars involved worked to preserve the original language as much as possible while focusing on the target language as well. Many original, well-known phrases were kept, but others were introduced to communicate concepts that had not previously translated smoothly into Spanish.  The NVI-Spanish Bible is an authentic and faithful translation of the original Bible texts into Spanish.
 Rafael Cruz is the featured reader with introductions by Norma Pinson.</string>
 
+    <string name="copy_write">The content is licensed by HarperCollins.  The copyrights of application is developed and owned by Azpen innovation.</string>
+
     <string name="back">Back</string>
     <string name="search">Search</string>
     <string name="notes">Notes</string>
     <string name="bookmark">Bookmark</string>
     <string name="favorite">favorite</string>
+    <string name="audio_list">Audios</string>
+    <string name="no_search_results">Sorry,no search results!</string>
+    <string name="delete_bookmark">delete bookmark</string>
+    <string name="delete_bookmark_success">delete bookmark success!</string>
+
+    <string name="file_not_exist">file is not exist</string>
+    <string name="parsing_file">Parsing file…</string>
+    <string name="save_bookmark">Save Bookmark Success!</string>
+
+    <string name="chapter">Chapter</string>
+    <string name="audio">Audio</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

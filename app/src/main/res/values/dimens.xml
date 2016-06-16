@@ -6,4 +6,5 @@
     <dimen name="title_height">55dp</dimen>
     <dimen name="title_size">18sp</dimen>
     <dimen name="chapter_text_size">18sp</dimen>
+    <dimen name="divide_size">1dp</dimen>
 </resources>

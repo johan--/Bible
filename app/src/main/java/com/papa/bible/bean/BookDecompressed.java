@@ -12,6 +12,15 @@ public class BookDecompressed {
     private List<String> urlResources;
     private Book book;
     private String baseURL;
+    private String epubFileDir;
+
+    public String getEpubFileDir() {
+        return epubFileDir;
+    }
+
+    public void setEpubFileDir(String epubFileDir) {
+        this.epubFileDir = epubFileDir;
+    }
 
     public BookDecompressed() {
         urlResources = new ArrayList<>();

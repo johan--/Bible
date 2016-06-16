@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.papa.bible.ReaderActivity">
 
     <com.papa.bible.view.VerticalViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_board"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <SeekBar
+            android:id="@+id/size_seek_bar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+
+        <RelativeLayout
+            android:id="@+id/play_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+
+            <ImageButton
+                android:id="@+id/img_pre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:src="@drawable/ic_play_pre"/>
+
+            <ImageButton
+                android:id="@+id/img_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:layout_toRightOf="@+id/img_pre"
+                android:contentDescription="@string/about"
+                android:src="@drawable/ic_play_pause"/>
+
+
+            <ImageButton
+                android:id="@+id/img_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:layout_toRightOf="@+id/img_play"
+                android:src="@drawable/ic_play_next"/>
+
+            <TextView
+                android:id="@+id/audio_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img_next"
+                android:ellipsize="end"
+                android:padding="5dp"
+                android:maxEms="10"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/img_chapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/img_chapter"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/img_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_search_history"/>
+
+        <ImageButton
+
+            android:id="@+id/img_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/img_search"
+            android:src="@drawable/img_bookmark"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

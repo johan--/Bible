@@ -67,6 +67,16 @@
             android:layout_height="wrap_content"
             android:text="@string/about_content_niv_spanish"/>
 
+        <TextView
+
+            style="@style/AboutContentText"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/copy_write"/>
+
 
     </LinearLayout>
 

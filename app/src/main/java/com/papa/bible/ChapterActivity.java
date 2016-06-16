@@ -1,8 +1,9 @@
 package com.papa.bible;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,17 +11,21 @@ import android.widget.TextView;
 
 import com.papa.bible.adapter.BaseAdapterHelper;
 import com.papa.bible.adapter.QuickAdapter;
-import com.papa.bible.bean.BookDecompressed;
-import com.papa.bible.data.Configuration;
+import com.papa.bible.data.DataBaseManager;
+import com.papa.bible.data.EntityLoader;
+import com.papa.bible.data.db.dao.BookChapterEntityDao;
+import com.papa.bible.data.db.database.BookChapterEntity;
+import com.papa.bible.data.db.database.BookEntity;
+import com.papa.bible.util.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import nl.siegmann.epublib.domain.TOCReference;
-import nl.siegmann.epublib.domain.TableOfContents;
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.QueryBuilder;
 
-public class ChapterActivity extends BaseActivity {
+public class ChapterActivity extends BaseActivity implements LoaderManager
+        .LoaderCallbacks<List<BookChapterEntity>> {
 
     @Bind(R.id.title_tv)
     TextView mTitleTv;
@@ -31,60 +36,60 @@ public class ChapterActivity extends BaseActivity {
     @Bind(R.id.note_tv)
     TextView mNoteTv;
 
-    private BookDecompressed mBookDecompressed;
+
+    private BookEntity mBookEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
-        mBookDecompressed = (BookDecompressed) Configuration.getData(Configuration.KEY_BOOK);
-        mTitleTv.setText(mBookDecompressed.getBook().getTitle());
-        new CreateIndex().execute(mBookDecompressed.getBook().getTableOfContents());
+
+        mBookEntity = (BookEntity) getIntent().getSerializableExtra(Config.KEY_BOOK);
+        mTitleTv.setText(mBookEntity.getName());
+        initData();
     }
 
+    private void initData() {
+        getSupportLoaderManager().initLoader(0, null, this);
+    }
 
-    /**
-     * *** Class AsyncTask *****
-     */
-    private class CreateIndex extends AsyncTask<TableOfContents, Void, List<TOCReference>> {
+    @Override
+    public Loader<List<BookChapterEntity>> onCreateLoader(int id, Bundle args) {
+        QueryBuilder<BookChapterEntity> queryBuilder = DataBaseManager.getInstance(this)
+                .getDaoSession()
+                .getBookChapterEntityDao().queryBuilder().where(BookChapterEntityDao.Properties
+                        .BookId.eq(mBookEntity.getId()));
+        Query<BookChapterEntity> query = queryBuilder.build();
+        return new EntityLoader(this, query);
+    }
 
-        private int lastPaging = 0;
-        private List<TOCReference> indexes;
+    @Override
+    public void onLoadFinished(Loader<List<BookChapterEntity>> loader, List<BookChapterEntity>
+            data) {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            indexes = new ArrayList<>();
-        }
-
-        @Override
-        protected List<TOCReference> doInBackground(TableOfContents... tableOfContentses) {
-            for (TOCReference tocReference : tableOfContentses[0].getTocReferences()) {
-                getIndexRecursive(tocReference);
+        final QuickAdapter<BookChapterEntity> adapter = new QuickAdapter<BookChapterEntity>
+                (ChapterActivity
+                        .this, R.layout.epub_chapter_list_iten, data) {
+            @Override
+            protected void convert(BaseAdapterHelper helper, BookChapterEntity item) {
+                helper.setText(R.id.tv, item.getTitle());
             }
-            return indexes;
-        }
+        };
 
-        @Override
-        protected void onPostExecute(final List<TOCReference> indexes) {
-            super.onPostExecute(indexes);
-            final QuickAdapter<TOCReference> adapter = new QuickAdapter<TOCReference>
-                    (ChapterActivity
-                    .this, R.layout.epub_chapter_list_iten, indexes) {
-                @Override
-                protected void convert(BaseAdapterHelper helper, TOCReference item) {
-                    helper.setText(R.id.tv, item.getTitle());
-                }
-            };
-
-            mListView.setAdapter(adapter);
-            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(ChapterActivity.this, ReaderActivity.class);
-                    intent.putExtra("resourceId", adapter.getItem(position).getResource().getId());
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ChapterActivity.this, ReaderActivity.class);
+                intent.putExtra(Config.KEY_BOOK, mBookEntity);
+                intent.putExtra(Config.KEY_RESOURCE_ID, adapter.getItem(position).getResourceId());
+//              intent.putExtra("resourceId", adapter.getItem(position).getResource().getId());
+                if (getIntent().getIntExtra(Config.KEY_TYPE, 0) > 0) {
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
                     startActivity(intent);
-
+                }
 
 //                    Resource resource = indexes.get(position).getResource();
 //                    int moveTo = mBookDecompressed.getBook().getSpine().findFirstResourceById
@@ -92,18 +97,13 @@ public class ChapterActivity extends BaseActivity {
 //                    viewPager.setCurrentItem(moveTo);
 //
 //                    menuDrawer.closeMenu();
-                }
-            });
-        }
-
-        //Recursive create index
-        private void getIndexRecursive(TOCReference tocReference) {
-            if (tocReference != null)
-                indexes.add(tocReference);
-
-            for (TOCReference item : tocReference.getChildren()) {
-                getIndexRecursive(item);
             }
-        }
+        });
     }
+
+    @Override
+    public void onLoaderReset(Loader<List<BookChapterEntity>> loader) {
+
+    }
+
 }
